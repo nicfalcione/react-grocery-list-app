@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
-import DataContext from '../context/DataContext'
+import { useStoreActions, useStoreState } from 'easy-peasy'
+import React from 'react'
 import '../index.css'
 
 const SearchItem = () => {
-  const {search, setSearch} = useContext(DataContext)
+  const search = useStoreState((state) => state.search)
+  const setSearch = useStoreActions((actions) => actions.setSearch)
 
   return (
     <form className='searchForm' onSubmit={(e) => e.preventDefault()}>
