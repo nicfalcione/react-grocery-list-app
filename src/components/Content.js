@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import { useStoreState } from 'easy-peasy';
+import React from 'react';
 import { toast } from 'react-toastify';
-import DataContext from '../context/DataContext';
 import '../index.css';
 import ItemList from './ItemList';
 
-const Content = ({ items }) => {
-    const { search, fetchError } = useContext(DataContext)
+const Content = ({ items, fetchError }) => {
+    const search = useStoreState((state) => state.search)
 
     return (
         <>

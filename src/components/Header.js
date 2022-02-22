@@ -4,7 +4,7 @@ import useWindowSize from '../hooks/useWindowSize';
 import '../index.css';
 
 const Header = ({ title }) => {
-  const width = useWindowSize()
+  const { width } = useWindowSize()
 
   return (
     <header>

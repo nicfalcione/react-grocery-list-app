@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
-import DataContext from '../context/DataContext'
+import { useStoreState } from 'easy-peasy'
+import React from 'react'
 import AddItem from './AddItem'
 import Content from './Content'
 import SearchItem from './SearchItem'
 
-const Home = () => {
-    const { isLoading, search, items } = useContext(DataContext)
+const Home = ({ isLoading, fetchError }) => {
+    const search = useStoreState((state) => state.search)
+    const items = useStoreState((state) => state.items)
 
     return (
         <>
@@ -17,6 +18,7 @@ const Home = () => {
                     items={items.filter(item =>
                         ((item.item).toLowerCase()).includes(search.toLowerCase())
                     )}
+                    fetchError={fetchError}
                 />}
             </main>
         </>

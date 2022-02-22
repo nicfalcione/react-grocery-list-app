@@ -1,30 +1,22 @@
-import React, { useContext, useRef, useState } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import React, { useRef, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { toast } from 'react-toastify';
-import api from '../api/GroceryApi';
-import DataContext from '../context/DataContext';
 import '../index.css';
 
 const AddItem = () => {
     const inputRef = useRef();
     const [newItem, setNewItem] = useState('')
-    const { items, setItems } = useContext(DataContext)
+    const items = useStoreState((state) => state.items)
+    const addItemAction = useStoreActions((actions) => actions.addItem)
 
-    const addItem = async (e) => {
+    const addItem = (e) => {
         e.preventDefault()
 
         if (newItem) {
             const newId = items.length ? items[items.length - 1].id + 1 : 1
             const item = { id: newId, checked: false, item: newItem }
-
-            try {
-                const response = await api.post('/items', item)
-                const allItems = [...items, response.data]
-                setItems(allItems)
-                setNewItem('')
-            } catch (error) {
-                toast.error(error.message)
-            }
+            addItemAction(item)
+            setNewItem('')
         }
     }
 

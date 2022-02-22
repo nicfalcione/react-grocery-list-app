@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import DataContext from '../context/DataContext';
+import { useStoreState } from 'easy-peasy';
+import React from 'react';
 import '../index.css';
 
 const Footer = () => {
-    const { items } = useContext(DataContext)
+    const itemCount = useStoreState((state) => state.itemCount)
 
     return (
         <footer>
-            <p>{items.length} List {items.length === 1 ? "item" : "Items"}</p>
+            <p>{itemCount} List {itemCount === 1 ? "item" : "Items"}</p>
         </footer>
     )
 }
